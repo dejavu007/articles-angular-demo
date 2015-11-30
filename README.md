@@ -1,2 +1,2 @@
 # articles-angular-demo
-A demo page created in angularjs for listing articles on www.tittojose.com
+A demo page created in angularjs for listing articles on www.tittojose.com . The data is fetched from web services created using a module (see https://github.com/dejavu007/site_ws). Working example can be viewed here - http://www.tittojose.com/demo/articles/index.html
