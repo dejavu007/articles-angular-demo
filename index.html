@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myArticles">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Code / Snippets / Articles – by Titto Jose</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="products.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+
+  <body ng-controller="ArticlesController as articles">
+    <!--  Page Header  -->
+    <header>
+      <h1 class="text-center">Code / Snippets / Articles</h1>
+      <h3 class="text-center articles-author">– by Titto Jose –</h3>
+    </header>
+
+    <!--  Articles Container  -->
+    <div class="list-group">
+      <!--  Article Container  -->
+      <div class="list-group-item" ng-repeat="article in articles.nodes | orderBy:'-created'">
+        <div class="article-post-date"><div class="date-wrapper-block"><div class="month">{{article.created | date : 'MMM'}}</div><div class="day">{{article.created | date : 'd'}}</div><div class="year">{{article.created | date : 'yyyy'}}</div></div></div>
+        <h3 class="article-title">{{article.title}}</h3>
+        <div class="clear"></div>
+        <div class="article-body">{{article.body_value | htmlToPlaintext | stringTrimmer: true : 100 : "..."}}</div>
+        <div class="article-read-more"><a href="{{article.url}}">Read more</a></div>
+      </div>
+
+    </div>
+  </body>
+</html>
