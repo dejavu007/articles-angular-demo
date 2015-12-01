@@ -14,12 +14,18 @@
     $scope.getPagerCount = function(n){
       return new Array(n);
     };
-    allArticles.changePage = function(currentPage){
-      var start = (currentPage - 1) * allArticles.itemsPerPage;
-      var end = start + allArticles.itemsPerPage;
-      allArticles.nodes = allArticles.allNodes.slice(start, end);
-      allArticles.currentPager = currentPage;
+    allArticles.changePage = function(currentPage, event){
+      if((0 < currentPage) && (currentPage <= $scope.pagerCount)) {
+        var start = (currentPage - 1) * allArticles.itemsPerPage;
+        var end = start + allArticles.itemsPerPage;
+        allArticles.nodes = allArticles.allNodes.slice(start, end);
+        allArticles.currentPager = currentPage;
+      }
+      event.preventDefault();
     }
+    allArticles.isActivePager = function(checkPager) {
+      return allArticles.currentPager === checkPager;
+    };
   }]);
 
   app.filter('htmlToPlaintext', function() {

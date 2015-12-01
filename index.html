@@ -34,8 +34,10 @@
       </div>
     </div>
     <div class="pager-wrapper">
-      <ul class="pagination">
-        <li ng-repeat="i in getPagerCount(pagerCount) track by $index" ng-class="pager-{{$index+1}}"><a href="#" ng-click="articles.changePage($index+1)">{{$index+1}}</a></li>
+      <ul class="pagination-sm pagination">
+        <li class="pagination-prev"><a href="#" ng-click="articles.changePage(articles.currentPager-1, $event)">‹</a></li>
+        <li class="pager-{{$index+1}}" ng-repeat="i in getPagerCount(pagerCount) track by $index" ng-class="{ active:articles.isActivePager($index+1) }"><a href="#" ng-click="articles.changePage($index+1, $event); $event.stopPropagation();">{{$index+1}}</a></li>
+        <li class="pagination-next"><a href="#" ng-click="articles.changePage(articles.currentPager+1, $event)">›</a></li>
       </ul>
     </div>
   </body>
