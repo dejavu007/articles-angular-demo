@@ -1,13 +1,25 @@
 (function() {
   var app = angular.module('myArticles', []);
 
-  app.controller('ArticlesController', ['$http', function($http){
+  app.controller('ArticlesController', ['$scope', '$http', function($scope, $http){
     var allArticles = this;
-    allArticles.nodes = [];
+    allArticles.currentPager = 1;
+    allArticles.itemsPerPage = 2;
     $http.get('/rest/all-articles.json').success(function(data){
-      allArticles.nodes = data;
-      console.log(data);
+      allArticles.allNodes = data;
+      allArticles.nodes = allArticles.allNodes.slice(0, allArticles.itemsPerPage);
+      allArticles.totalItems = allArticles.allNodes.length;
+      $scope.pagerCount = Math.ceil(allArticles.totalItems / allArticles.itemsPerPage);
     });
+    $scope.getPagerCount = function(n){
+      return new Array(n);
+    };
+    allArticles.changePage = function(currentPage){
+      var start = (currentPage - 1) * allArticles.itemsPerPage;
+      var end = start + allArticles.itemsPerPage;
+      allArticles.nodes = allArticles.allNodes.slice(start, end);
+      allArticles.currentPager = currentPage;
+    }
   }]);
 
   app.filter('htmlToPlaintext', function() {
